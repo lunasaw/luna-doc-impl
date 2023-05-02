@@ -13,14 +13,15 @@ import java.util.Stack;
  */
 public class ExpressionEvaluatorContext extends MethodBasedEvaluationContext {
 
+    private static final InheritableThreadLocal<Stack<Map<String, Object>>> LOG_CONTEXT = new InheritableThreadLocal<>();
+
     public ExpressionEvaluatorContext(Object rootObject, Method method, Object[] arguments) {
         super(rootObject, method, arguments, new DefaultParameterNameDiscoverer());
     }
 
-    private static final InheritableThreadLocal<Stack<Map<String, Object>>> LOG_CONTEXT = new InheritableThreadLocal<>();
-
     /**
      * 获取当前线程的变量
+     *
      * @return
      */
     public static Map<String, Object> getVariables() {
@@ -51,7 +52,7 @@ public class ExpressionEvaluatorContext extends MethodBasedEvaluationContext {
      */
     public static void popVariable() {
         Stack<Map<String, Object>> stack = LOG_CONTEXT.get();
-        if (stack != null && stack.size() > 0){
+        if (stack != null && stack.size() > 0) {
             stack.pop();
         } else {
             clear();

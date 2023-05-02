@@ -24,6 +24,16 @@ import java.lang.reflect.Method;
 public class LpLogAspect {
 
 
+    private static Method getRealMethod(JoinPoint pjp) throws NoSuchMethodException {
+        MethodSignature ms = (MethodSignature) pjp.getSignature();
+        Method method = ms.getMethod();
+        if (method.getDeclaringClass().isInterface()) {
+            method = pjp.getTarget().getClass().getDeclaredMethod(ms.getName(), method.getParameterTypes());
+        }
+
+        return method;
+    }
+
     @Pointcut("execution(* io.github.lunasaw.log.service.*.*(..))")
     public void lpLogAspect() {
     }
@@ -37,7 +47,7 @@ public class LpLogAspect {
         sbLog.append(methodName).append(" >> param=");
         if (joinPoint.getArgs() != null) {
             try {
-                sbLog.append(JSON.toJSONString(joinPoint.getArgs(), SerializerFeature.IgnoreNonFieldGetter)).append("");
+                sbLog.append(JSON.toJSONString(joinPoint.getArgs(), SerializerFeature.IgnoreNonFieldGetter));
             } catch (Exception e) {
                 sbLog.append("json parse error >> e=").append(e.getMessage());
             }
@@ -64,15 +74,5 @@ public class LpLogAspect {
 
         log.info(sbLog.toString());
         return result;
-    }
-
-    public static Method getRealMethod(JoinPoint pjp) throws NoSuchMethodException {
-        MethodSignature ms = (MethodSignature) pjp.getSignature();
-        Method method = ms.getMethod();
-        if (method.getDeclaringClass().isInterface()) {
-            method = pjp.getTarget().getClass().getDeclaredMethod(ms.getName(), method.getParameterTypes());
-        }
-
-        return method;
     }
 }

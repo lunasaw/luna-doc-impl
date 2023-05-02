@@ -1,4 +1,4 @@
-package io.github.lunasaw.log.controller;
+package io.github.lunasaw.test;
 
 import com.google.common.collect.ImmutableMap;
 import com.luna.common.dto.ResultDTO;

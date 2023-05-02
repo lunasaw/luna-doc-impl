@@ -1,6 +1,5 @@
 package io.github.lunasaw.log.service;
 
-import com.alibaba.fastjson2.JSON;
 import io.github.lunasaw.log.entity.UserDO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 @Service("userService")
 @Slf4j
 public class UserService {
-
 
 
     public Long add(UserDO userDO) {

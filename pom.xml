@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>gracefully-log</module>
+        <module>gracefully-log-test</module>
     </modules>
 
     <properties>
