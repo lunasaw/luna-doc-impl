@@ -1,0 +1,101 @@
+<configuration>
+
+    <property name="logRoot" value="log"/>
+    <property name="logLevel" value="app"/>
+    <property name="app" value="gracefully-log"/>
+    <property name="pattern" value="%d %p [%t] %c{20} %X{traceId:--} %line %m%n"/>
+    <property name="logHistory" value="7"/>
+    <property name="totalSizeCap" value="500MB"/>
+    <property name="maxFileSize" value="10MB"/>
+
+    <!-- ConsoleAppender：把日志输出到控制台 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logRoot}/${app}.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${logRoot}/${app}-error.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxHistory>${logHistory}</maxHistory>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logRoot}/info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${logRoot}/${app}-info.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxHistory>${logHistory}</maxHistory>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNC-INFO" class="ch.qos.logback.classic.AsyncAppender">
+        <!--内部实现是一个有界ArrayBlockingQueue,queueSize是队列大小。该值会影响性能.默认值为256-->
+        <queueSize>512</queueSize>
+        <!--当队列的剩余容量小于这个阈值并且当前日志level TRACE, DEBUG or INFO，则丢弃这些日志。默认为queueSize大小的20%。-->
+        <discardingThreshold>10</discardingThreshold>
+        <!--neverBlock=true则写日志队列时候会调用阻塞队列的offer方法而不是put，如果队列满则直接返回，而不是阻塞，即日志被丢弃。-->
+        <neverBlock>true</neverBlock>
+        <includeCallerData>false</includeCallerData>
+        <appender-ref ref="INFO"/>
+    </appender>
+
+    <appender name="OPERATE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logRoot}/operate.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${logRoot}/${app}-operate.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxHistory>${logHistory}</maxHistory>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="ASYNC-OPERATE" class="ch.qos.logback.classic.AsyncAppender">
+        <!--内部实现是一个有界ArrayBlockingQueue,queueSize是队列大小。该值会影响性能.默认值为256-->
+        <queueSize>512</queueSize>
+        <!--当队列的剩余容量小于这个阈值并且当前日志level TRACE, DEBUG or INFO，则丢弃这些日志。默认为queueSize大小的20%。-->
+        <discardingThreshold>10</discardingThreshold>
+        <!--neverBlock=true则写日志队列时候会调用阻塞队列的offer方法而不是put，如果队列满则直接返回，而不是阻塞，即日志被丢弃。-->
+        <neverBlock>true</neverBlock>
+        <includeCallerData>false</includeCallerData>
+        <appender-ref ref="OPERATE"/>
+    </appender>
+
+    <logger name="OPERATE" level="${logLevel}" additivity="false">
+        <appender-ref ref="ASYNC-OPERATE"/>
+    </logger>
+
+
+    <!-- 日志输出级别 -->
+    <root level="${logLevel}">
+        <appender-ref ref="ASYNC-INFO"/>
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>
