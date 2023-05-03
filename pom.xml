@@ -19,6 +19,7 @@
         <spring-boot.version>2.7.11</spring-boot.version>
         <luna-common.version>2.4.5</luna-common.version>
         <github.username>lunasaw</github.username>
+        <app.profiles>${project.name}</app.profiles>
     </properties>
 
     <dependencyManagement>
@@ -59,4 +60,21 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

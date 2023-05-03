@@ -1,0 +1,12 @@
+2023-05-03 14:38:24,877 INFO [main] i.g.l.l.LogApplication - ? Starting LogApplication using Java 1.8.0_332 on 192.168.2.102 with PID 6608 (/Users/weidian/my-project/luna-doc-impl/gracefully-log/target/gracefully-log-1.0-SNAPSHOT.jar started by weidian in /Users/weidian/my-project/luna-doc-impl/run)
+2023-05-03 14:38:24,880 INFO [main] i.g.l.l.LogApplication - 631 No active profile set, falling back to 1 default profile: "default"
+2023-05-03 14:38:25,650 INFO [main] o.s.b.w.e.t.TomcatWebServer - ? Tomcat initialized with port(s): 6081 (http)
+2023-05-03 14:38:25,657 INFO [main] o.a.c.h.Http11NioProtocol - ? Initializing ProtocolHandler ["http-nio-6081"]
+2023-05-03 14:38:25,657 INFO [main] o.a.c.c.StandardService - 173 Starting service [Tomcat]
+2023-05-03 14:38:25,657 INFO [main] o.a.c.c.StandardEngine - ? Starting Servlet engine: [Apache Tomcat/9.0.74]
+2023-05-03 14:38:25,705 INFO [main] o.a.c.c.C.[.[.[/] - ? Initializing Spring embedded WebApplicationContext
+2023-05-03 14:38:25,705 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext - 292 Root WebApplicationContext: initialization completed in 785 ms
+2023-05-03 14:38:26,034 INFO [main] i.g.l.l.c.OperateLogAutoConfiguration - ? @EnableAutoLogConfig is not present on importing class
+2023-05-03 14:38:26,058 INFO [main] o.a.c.h.Http11NioProtocol - ? Starting ProtocolHandler ["http-nio-6081"]
+2023-05-03 14:38:26,071 INFO [main] o.s.b.w.e.t.TomcatWebServer - ? Tomcat started on port(s): 6081 (http) with context path ''
+2023-05-03 14:38:26,088 INFO [main] i.g.l.l.LogApplication - 61 Started LogApplication in 1.518 seconds (JVM running for 1.803)
