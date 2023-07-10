@@ -11,6 +11,7 @@
     <modules>
         <module>gracefully-log</module>
         <module>gracefully-log-test</module>
+        <module>nio-chat</module>
     </modules>
 
     <properties>

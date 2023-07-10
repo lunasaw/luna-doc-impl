@@ -6,8 +6,9 @@
 
 美团文档技术实现案例
 
-| 案例      | 文章                                                                   | 实现模块                                                              |
-|---------|----------------------------------------------------------------------|-------------------------------------------------------------------|
-| 优雅的日志打印 | [文章路径](https://tech.meituan.com/2021/09/16/operational-logbook.html) | https://github.com/lunasaw/luna-doc-impl/tree/main/gracefully-log |
-|         |                                                                      |                                                                   |
+| 案例               | 文章                                                                   | 实现模块                                                              |
+|------------------|----------------------------------------------------------------------|-------------------------------------------------------------------|
+| 优雅的日志打印          | [文章路径](https://tech.meituan.com/2021/09/16/operational-logbook.html) | https://github.com/lunasaw/luna-doc-impl/tree/main/gracefully-log |
+| 理解什么是BIO/NIO/AIO | [文章路径](https://segmentfault.com/a/1190000037714804)                  | https://github.com/lunasaw/luna-doc-impl/tree/main/nio-chat       |
+|                  |                                                                      |                                                                   |
 
