@@ -12,6 +12,7 @@
         <module>gracefully-log</module>
         <module>gracefully-log-test</module>
         <module>nio-chat</module>
+        <module>netty-start</module>
     </modules>
 
     <properties>

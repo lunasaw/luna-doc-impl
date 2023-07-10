@@ -10,5 +10,5 @@
 |------------------|----------------------------------------------------------------------|-------------------------------------------------------------------|
 | 优雅的日志打印          | [文章路径](https://tech.meituan.com/2021/09/16/operational-logbook.html) | https://github.com/lunasaw/luna-doc-impl/tree/main/gracefully-log |
 | 理解什么是BIO/NIO/AIO | [文章路径](https://segmentfault.com/a/1190000037714804)                  | https://github.com/lunasaw/luna-doc-impl/tree/main/nio-chat       |
-|                  |                                                                      |                                                                   |
+| 超详细Netty入门       | [文章路径](https://developer.aliyun.com/article/769587)                  | https://github.com/lunasaw/luna-doc-impl/tree/main/netty-start    |
 
