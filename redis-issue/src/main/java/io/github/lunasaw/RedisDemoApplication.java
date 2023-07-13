@@ -3,7 +3,7 @@ package io.github.lunasaw;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
-import io.github.lunasaw.leaderboard.service.LeaderBoardService;
+import io.github.lunasaw.leaderboard.LeaderBoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +19,12 @@ import org.springframework.data.redis.core.ReactiveValueOperations;
 
 import com.google.common.collect.ImmutableMap;
 
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import reactor.core.publisher.Mono;
 
 @Slf4j
 @SpringBootApplication
+@EnableRedisHttpSession
 public class RedisDemoApplication implements ApplicationRunner {
 
     @Autowired

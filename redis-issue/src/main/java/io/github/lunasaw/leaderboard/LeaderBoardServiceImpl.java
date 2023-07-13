@@ -1,4 +1,4 @@
-package io.github.lunasaw.leaderboard.service;
+package io.github.lunasaw.leaderboard;
 
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;

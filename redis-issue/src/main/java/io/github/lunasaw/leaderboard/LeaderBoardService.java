@@ -1,4 +1,4 @@
-package io.github.lunasaw.leaderboard.service;
+package io.github.lunasaw.leaderboard;
 
 public interface LeaderBoardService {
     void updateScore(String user, double score);
