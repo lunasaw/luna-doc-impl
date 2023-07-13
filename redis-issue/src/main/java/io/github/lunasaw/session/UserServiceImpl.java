@@ -16,6 +16,9 @@ public class UserServiceImpl implements UserService {
 
     public void login(String username) {
         Session session = sessionRepository.findById(getSessionId());
+        if (session == null) {
+            session = sessionRepository.createSession();
+        }
         session.setAttribute("username", username);
         sessionRepository.save(session);
     }
