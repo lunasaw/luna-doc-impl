@@ -13,6 +13,7 @@
         <module>gracefully-log-test</module>
         <module>nio-chat</module>
         <module>netty-start</module>
+        <module>redis-issue</module>
     </modules>
 
     <properties>

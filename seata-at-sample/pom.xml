@@ -13,7 +13,7 @@
     <artifactId>seata-at-sample</artifactId>
 
     <modules>
-        <module>seata-at-order-service</module>
+        <module>seata-at-account-service</module>
         <module>seata-at-business-service</module>
         <module>seata-at-order-service</module>
         <module>seata-at-storage-service</module>

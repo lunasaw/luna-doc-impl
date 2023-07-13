@@ -12,4 +12,5 @@
 | 理解什么是BIO/NIO/AIO | [文章路径](https://segmentfault.com/a/1190000037714804)                  | https://github.com/lunasaw/luna-doc-impl/tree/main/nio-chat        |
 | 超详细Netty入门       | [文章路径](https://developer.aliyun.com/article/769587)                  | https://github.com/lunasaw/luna-doc-impl/tree/main/netty-start     |
 | 分布式事务seata       | [文章路径](https://www.cnblogs.com/chengxy-nds/p/14046856.html)          | https://github.com/lunasaw/luna-doc-impl/tree/main/seata-at-sample |
+| Redis使用场景        | [文章路径](https://blog.csdn.net/agonie201218/article/details/123640871) | https://github.com/lunasaw/luna-doc-impl/tree/main/redis-issue     |
 
