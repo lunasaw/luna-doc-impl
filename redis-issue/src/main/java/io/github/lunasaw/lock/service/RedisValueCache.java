@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class RedisValueCache {
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<Object, Object> redisTemplate;
 
     public void cache(final String key, final Object data) {
         redisTemplate.opsForValue().set(key, data);
