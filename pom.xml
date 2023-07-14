@@ -14,6 +14,7 @@
         <module>nio-chat</module>
         <module>netty-start</module>
         <module>redis-issue</module>
+        <module>reentrant-lock</module>
     </modules>
 
     <properties>
