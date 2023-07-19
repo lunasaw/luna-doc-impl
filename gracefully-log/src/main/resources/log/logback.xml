@@ -1,7 +1,7 @@
 <configuration>
 
     <property name="logRoot" value="log"/>
-    <property name="logLevel" value="app"/>
+    <property name="logLevel" value="info"/>
     <property name="app" value="gracefully-log"/>
     <property name="pattern" value="%d %p [%t] %c{20} %X{traceId:--} %line %m%n"/>
     <property name="logHistory" value="7"/>
