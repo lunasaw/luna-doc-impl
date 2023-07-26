@@ -71,7 +71,7 @@ public class RedisDemoApplication implements ApplicationRunner {
             if (obj != null) {
                 System.out.println(obj);
             }
-            // DB select apple pro
+            // DB select apple proÎ
         });
 
     }
