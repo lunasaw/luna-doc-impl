@@ -16,6 +16,7 @@
         <module>redis-issue</module>
         <module>reentrant-lock</module>
         <module>dubbo-log</module>
+        <module>run-task</module>
     </modules>
 
     <properties>

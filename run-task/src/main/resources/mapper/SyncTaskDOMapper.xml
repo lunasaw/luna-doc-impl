@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="io.github.lunasaw.mapper.SyncTaskDOMapper">
+    <resultMap id="BaseResultMap" type="io.github.lunasaw.mapper.SyncTaskDO">
+        <id column="id" property="id"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_update" property="gmtUpdate"/>
+        <result column="type" property="type"/>
+        <result column="resource_key" property="resourceKey"/>
+        <result column="resource_version" property="resourceVersion"/>
+        <result column="status" property="status"/>
+        <result column="fail_cnt" property="failCnt"/>
+        <result column="extend" property="extend"/>
+        <result column="version" property="version"/>
+        <result column="resource_time" property="resourceTime"/>
+        <result column="env" property="env"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, gmt_create, gmt_update, type, resource_key, resource_version, status, fail_cnt,
+    extend, version, resource_time, env
+    </sql>
+    <select id="count" resultType="java.lang.Integer" parameterType="io.github.lunasaw.SyncTaskQueryReqDTO">
+        select count(*)
+        from sync_task
+        <where>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="resourceKey != null">
+                and resource_key = #{resourceKey}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
+    <select id="query" resultMap="BaseResultMap" parameterType="io.github.lunasaw.SyncTaskQueryReqDTO">
+        select
+        <include refid="Base_Column_List"/>
+        from sync_task
+        <where>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="resourceKey != null">
+                and resource_key = #{resourceKey}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+        order by resource_time desc
+        limit #{offset}, #{limit}
+    </select>
+    <select id="queryByLastId" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from sync_task
+        <where>
+            <if test="lastId != null">
+                and id &lt; #{lastId}
+            </if>
+            <if test="maxResourceTime != null">
+                and resource_time &lt; #{maxResourceTime}
+            </if>
+        </where>
+        order by id desc
+        limit #{limit}
+    </select>
+    <delete id="delete" parameterType="map">
+        delete
+        from sync_task
+        where id = #{id}
+          and version = #{version}
+    </delete>
+    <select id="countByStatus" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select count(*)
+        from sync_task
+        where status = #{status}
+    </select>
+    <select id="selectByMinVersion" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from sync_task
+        where type = #{type}
+        and resource_key = #{resourceKey}
+        and resource_version > #{resourceVersion}
+        and env = #{env}
+    </select>
+    <select id="selectAlwaysRunning" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from sync_task
+        where status = 1
+        and gmt_update &lt; #{fromTime}
+    </select>
+    <select id="selectToBeProcessed" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from sync_task
+        where type = #{type}
+        and resource_time &lt; #{fromTime}
+        and (status = 0 or status = 3)
+        and fail_cnt &lt; #{maxRetry}
+        and env = #{env}
+        order by resource_time asc
+        limit #{limit}
+    </select>
+    <select id="selectByMaxResourceVersion" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from sync_task
+        where type = #{type} and resource_key = #{resourceKey} and env = #{env}
+        order by resource_version desc
+        limit 1
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from sync_task
+        where id = #{id}
+    </select>
+    <insert id="insert" parameterType="io.github.lunasaw.mapper.SyncTaskDO">
+        insert into sync_task
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="type != null">
+                type,
+            </if>
+            <if test="resourceKey != null">
+                resource_key,
+            </if>
+            <if test="resourceVersion != null">
+                resource_version,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="failCnt != null">
+                fail_cnt,
+            </if>
+            <if test="extend != null">
+                extend,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+            <if test="env != null">
+                env,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="type != null">
+                #{type},
+            </if>
+            <if test="resourceKey != null">
+                #{resourceKey},
+            </if>
+            <if test="resourceVersion != null">
+                #{resourceVersion},
+            </if>
+            <if test="status != null">
+                #{status},
+            </if>
+            <if test="failCnt != null">
+                #{failCnt},
+            </if>
+            <if test="extend != null">
+                #{extend},
+            </if>
+            <if test="version != null">
+                #{version},
+            </if>
+            <if test="env != null">
+                #{env},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="io.github.lunasaw.mapper.SyncTaskDO">
+        update sync_task
+        set
+        <if test="status != null">
+            status = #{status},
+        </if>
+        <if test="failCnt != null">
+            fail_cnt = #{failCnt},
+        </if>
+        <if test="extend != null">
+            extend = #{extend},
+        </if>
+        <if test="resourceTime != null">
+            resource_time = #{resourceTime},
+        </if>
+        version = version + 1
+        where id = #{id} and version = #{version}
+    </update>
+</mapper>
