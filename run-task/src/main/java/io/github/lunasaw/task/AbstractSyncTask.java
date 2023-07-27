@@ -18,8 +18,10 @@ import io.github.lunasaw.SyncTaskStatus;
 import io.github.lunasaw.mapper.SyncTaskDO;
 import io.github.lunasaw.service.SyncTaskService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 @Slf4j(topic = "dataSync")
+@Component
 public abstract class AbstractSyncTask implements InitializingBean {
 
     @Value("${app.notify.userList}")
@@ -137,7 +139,7 @@ public abstract class AbstractSyncTask implements InitializingBean {
                         }, taskExecutor);
                         futureList.add(future);
                     }
-                    CompletableFuture.allOf(futureList.toArray(new CompletableFuture[futureList.size()])).join();
+                    CompletableFuture.allOf(futureList.toArray(new CompletableFuture[0])).join();
                 }
             }
             long endTime = System.currentTimeMillis();
