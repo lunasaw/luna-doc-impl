@@ -8,3 +8,5 @@ spring:
 
 app:
   env: dev
+  notify:
+    userList: 1,2,3,4,5
