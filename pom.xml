@@ -17,6 +17,7 @@
         <module>reentrant-lock</module>
         <module>dubbo-log</module>
         <module>run-task</module>
+        <module>sqlite-mybatis</module>
     </modules>
 
     <properties>
