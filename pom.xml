@@ -18,6 +18,7 @@
         <module>dubbo-log</module>
         <module>run-task</module>
         <module>sqlite-mybatis</module>
+        <module>point-upload</module>
     </modules>
 
     <properties>

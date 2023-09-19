@@ -56,7 +56,7 @@ public class LockUtil {
      */
     public boolean getLock(String key, String value, int expire) {
         try {
-            return redisTemplate.opsForValue().setIfAbsent(key, value, expire, TimeUnit.SECONDS);
+            return Boolean.TRUE.equals(redisTemplate.opsForValue().setIfAbsent(key, value, expire, TimeUnit.SECONDS));
         } catch (Exception e) {
             LOGGER.error("LockUtil.getLock error", e);
         }

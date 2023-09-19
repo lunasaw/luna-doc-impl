@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>upload</title>
+    <link rel="stylesheet" type="text/css" href="webuploader.css">
+    <script src="jquery.js"></script>
+    <script src="webuploader.js"></script>
+
+    <style>
+
+        #upload-container {
+            width: 500px;
+            height: 500px;
+            background: lightskyblue;
+            padding-bottom: 10px;
+        }
+    </style>
+
+
+</head>
+<body>
+<div id="upload-container">
+    <span>文件拖拽上传</span>
+</div>
+<div id="upload-list"></div>
+
+
+<button id="picker" style="margin-top: 50px">点击上传</button>
+</body>
+<script>
+    $('#upload-container').click(function (event) {
+        $("#picker").find('input').click();
+    });
+    //初始化上传组件
+    const uploader = WebUploader.create({
+        auto: true,
+        swf: 'Uploader.swf', //swf文件路径
+        server: 'http://localhost:9000/upload', //上传接口
+        dnd: '#upload-container',
+        pick: '#picker',  //内部根据当前运行创建
+        multiple: true,     //选择多个
+        chunked: true,      //开启分片
+        threads: 20,        //并发数
+        method: 'POST',
+        fileSizeLimit: 1024 * 1024 * 1024 * 100, // 文件总大小为100G
+        fileSingleSizeLimit: 1024 * 1024 * 1024 * 5,  //单个文件大小最大为1G
+        fileVal: 'upload'
+    });
+    //入队之前触发事件
+    uploader.on("beforeFileQueued", function (file) {
+        console.log(file); //获取文件后缀
+    });
+    //入队触发事件
+    uploader.on('fileQueued', function (file) {
+        //选中文件要做的事
+        console.log(file.ext);
+        console.log(file.size);
+        console.log(file.name);
+        const html = '<div class="upload-item"><span>文件名：' + file.name + '</span><span data-file_id="' + file.id + '"class="btn-delete">删除</span><span data-file_id="' + file.id + '"class="btn-retry">重试</span><div class="percentage ' + file.id + '" style="width: 0%;"></div></div>';
+        $('#upload-list').append(html);
+        uploader.md5File(file)  //给文件定义唯一的md5值，当再次上传相同文件时，就不用传了  大文件秒传实际上是没传，直接拷贝之前文件地址
+            //显示进度
+            .progress(function (percentage) {
+                console.log('Percentage:', percentage);
+            })
+            //完成
+            .then(function (val) {
+                console.log('md5 result', val);
+            });
+    });
+</script>
+</html>
